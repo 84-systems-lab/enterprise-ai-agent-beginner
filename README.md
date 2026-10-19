@@ -23,8 +23,12 @@ or model request is needed for those lessons.
 ## Source version and book resources
 
 This is the complete source snapshot for the beginner book. Keep an unchanged
-archive and record the version used for your build. The public GitHub address
-will be added to the book's Appendix B resources section. A GitHub repository's
+archive and record the version used for your build. Visit the
+[84 Systems Lab book website](https://84-systems-lab.github.io/) for complete
+downloads, all twelve chapter packs and checksums. Browse the
+[GitHub source](https://github.com/84-systems-lab/enterprise-ai-agent-beginner).
+The [original first-edition code snapshot](https://github.com/84-systems-lab/enterprise-ai-agent-beginner/tree/7f1b8ba16694bddb71353fef5e6c01c66df290a8)
+preserves the starting code. A GitHub repository's
 newest default branch may accompany a later edition; choose the version named
 for your book. The supplied ZIP is sufficient to begin without Git experience.
 Extract updates into a new folder rather than over your configured project.

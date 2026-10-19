@@ -2024,8 +2024,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3430,
-      "sha256": "2a36f5bf095343aedeb17b6b11eb353ebbfba23781160cb442fed819276ecc61"
+      "bytes": 3763,
+      "sha256": "4440098eae0ef8ba8ed04105a21d19453a961b64a66c520775cbdc73afe79048"
     },
     {
       "path": "requirements-cloud.lock",
