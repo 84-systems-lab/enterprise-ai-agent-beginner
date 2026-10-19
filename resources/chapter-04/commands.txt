@@ -1,0 +1,23 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+.\.venv\Scripts\python.exe -m learning.tool
+
+
+.\.venv\Scripts\python.exe -m learning.agent damaged
+
+
+.\.venv\Scripts\python.exe -m learning.my_agent
+
+
+.\.venv\Scripts\python.exe -m learning.check_lessons
+
+
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.lock
+.\.venv\Scripts\python.exe -m pip show mcp
+
+
+.\.venv\Scripts\python.exe tools/mcp_agent_demo.py
+
+
+.\.venv\Scripts\python.exe tools/mcp_agent_demo.py --agent

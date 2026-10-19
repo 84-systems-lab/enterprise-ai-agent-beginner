@@ -1,0 +1,11 @@
+app/shared/askanydoc_rag/embeddings.py
+frontend/.env.local
+infra/answer_jobs_build
+infra/book.tfvars
+infra/book.tfvars.example
+infra/bootstrap
+infra/bootstrap/bootstrap.tfvars
+infra/build
+infra/salesforce_web_build
+resources/setup/access-checklist.md
+tools/verify_packages.py

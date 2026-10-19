@@ -1,0 +1,14 @@
+# Example placeholders. Copy to book.tfvars and enter YOUR values.
+project_name = "eos-book-your-unique-suffix"
+expected_account_id = "000000000000"
+aws_region = "ap-southeast-2"
+answer_model_id = "REPLACE_WITH_VERIFIED_SUPPORTED_MODEL_OR_PROFILE"
+aurora_engine_version = "REPLACE_WITH_AVAILABLE_AURORA_POSTGRESQL_VERSION"
+entra_tenant_id = "REPLACE_WITH_YOUR_TENANT_ID"
+entra_api_client_id = "REPLACE_WITH_YOUR_API_CLIENT_ID"
+entra_api_scope = "api://REPLACE_WITH_YOUR_API_CLIENT_ID/access_as_user"
+sharepoint_enabled = false
+salesforce_web_enabled = false
+budget_notification_emails = []
+answer_model_resource_arns = ["REPLACE_WITH_YOUR_VERIFIED_MODEL_ARNS"]
+ingestion_image_uri = "REPLACE_WITH_YOUR_BOOK_REPOSITORY_URI@sha256:REPLACE_WITH_DIGEST"

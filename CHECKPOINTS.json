@@ -1,0 +1,67 @@
+{
+  "edition": "3",
+  "complete_source_root": ".",
+  "originating_book_source_archive_sha256": "5c36db1e1a01c75fc235f79cb24c502f67cc40a0acf78842934bbf1cf4dc3f9b",
+  "chapters": [
+    {
+      "chapter": 1,
+      "resource_directory": "resources/chapter-01",
+      "source_root": "."
+    },
+    {
+      "chapter": 2,
+      "resource_directory": "resources/chapter-02",
+      "source_root": "."
+    },
+    {
+      "chapter": 3,
+      "resource_directory": "resources/chapter-03",
+      "source_root": "."
+    },
+    {
+      "chapter": 4,
+      "resource_directory": "resources/chapter-04",
+      "source_root": "."
+    },
+    {
+      "chapter": 5,
+      "resource_directory": "resources/chapter-05",
+      "source_root": "."
+    },
+    {
+      "chapter": 6,
+      "resource_directory": "resources/chapter-06",
+      "source_root": "."
+    },
+    {
+      "chapter": 7,
+      "resource_directory": "resources/chapter-07",
+      "source_root": "."
+    },
+    {
+      "chapter": 8,
+      "resource_directory": "resources/chapter-08",
+      "source_root": "."
+    },
+    {
+      "chapter": 9,
+      "resource_directory": "resources/chapter-09",
+      "source_root": "."
+    },
+    {
+      "chapter": 10,
+      "resource_directory": "resources/chapter-10",
+      "source_root": "."
+    },
+    {
+      "chapter": 11,
+      "resource_directory": "resources/chapter-11",
+      "source_root": "."
+    },
+    {
+      "chapter": 12,
+      "resource_directory": "resources/chapter-12",
+      "source_root": "."
+    }
+  ]
+}

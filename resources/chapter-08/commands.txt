@@ -1,0 +1,36 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+$documentBucket = terraform -chdir=infra output -raw document_bucket_name
+
+
+Copy-Item resources/company/returns-policy.md local-records/update-exercise.md
+aws s3 cp local-records/update-exercise.md "s3://$documentBucket/uploads/update-exercise.md"
+Get-FileHash local-records/update-exercise.md -Algorithm SHA256
+.\.venv\Scripts\python.exe tools/live.py database
+
+
+$updatedPolicy = (Get-Content local-records/update-exercise.md -Raw).Replace('7 calendar days', '10 calendar days')
+Set-Content -LiteralPath local-records/update-exercise.md -Value $updatedPolicy -Encoding utf8 -NoNewline
+aws s3 cp local-records/update-exercise.md "s3://$documentBucket/uploads/update-exercise.md"
+Get-FileHash local-records/update-exercise.md -Algorithm SHA256
+.\.venv\Scripts\python.exe tools/live.py database
+
+
+.\.venv\Scripts\python.exe tools/live.py retrieve --question 'damaged chair reporting period'
+
+
+$bookUri = "s3://$documentBucket/uploads/update-exercise.md"
+aws s3 rm $bookUri
+.\.venv\Scripts\python.exe tools/manage_document.py --source-uri $bookUri
+
+
+.\.venv\Scripts\python.exe tools/manage_document.py --source-uri $bookUri --confirm-remove $bookUri
+.\.venv\Scripts\python.exe tools/live.py database
+
+
+.\.venv\Scripts\python.exe tools/source_tests.py api
+
+
+$bookWorker = terraform -chdir=infra output -raw answer_worker_lambda_name
+aws logs tail "/aws/lambda/$bookWorker" --since 10m

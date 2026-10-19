@@ -1,0 +1,17 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+Set-Location infra
+terraform plan -var-file=book.tfvars -out=salesforce-review.tfplan
+terraform show -no-color salesforce-review.tfplan
+
+
+terraform apply salesforce-review.tfplan
+Set-Location ..
+
+
+aws sts get-caller-identity
+.\.venv\Scripts\python.exe infra/set_salesforce_web_client.py --secret-id 'YOUR_EOS_BOOK_PREFIX/salesforce-web-client-dev'
+
+
+.\.venv\Scripts\python.exe tools/source_tests.py salesforce

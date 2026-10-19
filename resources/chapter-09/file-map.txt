@@ -1,0 +1,5 @@
+app/sharepoint/microsoft_identity.py
+app/sharepoint/test_sharepoint_source.py
+frontend/.env.local
+infra/book.tfvars
+resources/company/sharepoint-triage.pdf

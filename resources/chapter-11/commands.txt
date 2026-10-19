@@ -1,0 +1,34 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+.\.venv\Scripts\python.exe -m learning.agent damaged
+
+
+Copy-Item resources/agent/agent-design.md local-records/agent-design.md
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --sources aws
+
+
+New-Item -ItemType Directory -Path local-records -Force | Out-Null
+Copy-Item resources/agent/agent_starter.py local-records/my_agent.py
+.\.venv\Scripts\python.exe tools/live.py identity
+
+
+.\.venv\Scripts\python.exe local-records/my_agent.py --question 'What is needed to report a damaged chair?'
+
+
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --sources aws sharepoint salesforce
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --sources aws sharepoint --unavailable sharepoint
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --sources sharepoint --question 'approval exception' --user alex
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --sources sharepoint --question 'approval exception' --user sam
+
+
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --repeat --tool-budget 1
+
+
+.\.venv\Scripts\python.exe tools/check.py
+.\.venv\Scripts\python.exe tools/source_tests.py api
+Set-Location frontend
+node --test src/agentRequest.test.js
+npm run lint
+npm run build
+Set-Location ..

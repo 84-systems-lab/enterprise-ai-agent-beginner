@@ -1,0 +1,3 @@
+app/salesforce/read_adapter.py
+infra/book.tfvars
+resources/company/salesforce-cases.csv

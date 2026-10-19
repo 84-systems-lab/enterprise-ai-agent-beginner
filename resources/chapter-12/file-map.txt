@@ -1,0 +1,8 @@
+frontend/src/App.jsx
+infra/bootstrap
+infra/vector_database.tf
+resources/agent/source-contract.md
+resources/evaluation/live-matrix.csv
+resources/operations/release-record.md
+tools/build_packages.py
+tools/verify_packages.py

@@ -1,0 +1,53 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+Copy-Item resources/evaluation/live-matrix.csv local-records/live-matrix.csv
+Copy-Item resources/operations/release-record.md local-records/release-record.md
+
+
+$originalCluster = $env:VECTOR_DATABASE_ARN
+$originalSecret = $env:VECTOR_DATABASE_SECRET_ARN
+$originalDatabase = $env:VECTOR_DATABASE_NAME
+$env:VECTOR_DATABASE_ARN = 'YOUR_RESTORED_CLUSTER_ARN'
+$env:VECTOR_DATABASE_SECRET_ARN = 'YOUR_RESTORED_SECRET_ARN'
+$env:VECTOR_DATABASE_NAME = 'YOUR_RESTORED_DATABASE_NAME'
+.\.venv\Scripts\python.exe tools/live.py database
+.\.venv\Scripts\python.exe tools/live.py retrieve --question 'damaged chair reporting requirements'
+$env:VECTOR_DATABASE_ARN = $originalCluster
+$env:VECTOR_DATABASE_SECRET_ARN = $originalSecret
+$env:VECTOR_DATABASE_NAME = $originalDatabase
+
+
+$bookSourceZip = 'YOUR_FULL_PATH_TO_ENTERPRISE_AI_AGENT_COMPANION_ZIP'
+Expand-Archive -LiteralPath $bookSourceZip -DestinationPath local-records/release-source-book01
+
+
+Remove-Item -LiteralPath local-records/release-source-book01/SOURCE_MANIFEST.json,local-records/release-source-book01/CHECKPOINTS.json
+.\.venv\Scripts\python.exe -m zipfile -c local-records/eos-source-book01.zip local-records/release-source-book01
+.\.venv\Scripts\python.exe -m zipfile -t local-records/eos-source-book01.zip
+Get-FileHash local-records/eos-source-book01.zip -Algorithm SHA256
+
+
+Set-Location infra
+terraform plan -destroy -var-file=book.tfvars -out=book-cleanup-review.tfplan
+terraform show -no-color book-cleanup-review.tfplan
+
+
+terraform plan -var-file=book.tfvars -out=teardown-preparation.tfplan
+terraform show -no-color teardown-preparation.tfplan
+
+
+terraform apply teardown-preparation.tfplan
+
+
+terraform plan -destroy -var-file=book.tfvars -out=book-cleanup-review.tfplan
+terraform show -no-color book-cleanup-review.tfplan
+terraform apply book-cleanup-review.tfplan
+
+
+Set-Location ..
+terraform -chdir=infra/bootstrap plan -destroy -var-file=bootstrap.tfvars -out=registry-cleanup-review.tfplan
+terraform -chdir=infra/bootstrap show -no-color registry-cleanup-review.tfplan
+
+
+terraform -chdir=infra/bootstrap apply registry-cleanup-review.tfplan

@@ -1,0 +1,97 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+docker version
+aws --version
+terraform version
+
+
+aws --version
+aws configure sso --profile eos-book
+
+
+$env:AWS_PROFILE = 'YOUR_BOOK_PROFILE'
+$env:AWS_DEFAULT_REGION = 'ap-southeast-2'
+aws sso login --profile $env:AWS_PROFILE
+aws sts get-caller-identity
+
+
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.lock
+.\.venv\Scripts\python.exe tools/check.py
+.\.venv\Scripts\python.exe tools/source_tests.py api
+.\.venv\Scripts\python.exe tools/source_tests.py ingestion
+.\.venv\Scripts\python.exe tools/source_tests.py sharepoint
+.\.venv\Scripts\python.exe tools/source_tests.py salesforce
+
+
+$env:EMBEDDING_MODEL_ID = 'amazon.titan-embed-text-v2:0'
+$env:ANSWER_MODEL_ID = 'au.anthropic.claude-haiku-4-5-20251001-v1:0'
+aws bedrock get-inference-profile --inference-profile-identifier $env:ANSWER_MODEL_ID
+.\.venv\Scripts\python.exe tools/live.py embed --question 'damaged chair returns'
+.\.venv\Scripts\python.exe app/api/bedrock_smoke.py
+
+
+Set-Location infra/bootstrap
+Copy-Item bootstrap.tfvars.example bootstrap.tfvars
+terraform init
+terraform fmt -check
+terraform validate
+terraform plan -var-file=bootstrap.tfvars -out=registry-review.tfplan
+terraform show -no-color registry-review.tfplan
+
+
+terraform apply registry-review.tfplan
+$bookRepositoryUrl = terraform output -raw repository_url
+$bookRegistry = $bookRepositoryUrl.Split('/')[0]
+$bookRepository = $bookRepositoryUrl.Split('/')[1]
+Set-Location ../..
+
+
+docker buildx build --platform linux/amd64 --provenance=false --load -f app/ingestion/runtime/Dockerfile -t eos-book-ingestion:book01 .
+docker run --rm -e AWS_EC2_METADATA_DISABLED=true -e AWS_DEFAULT_REGION=ap-southeast-2 --entrypoint /var/lang/bin/python eos-book-ingestion:book01 -c "import ingestion_lambda_handler, pypdf, docx; print('ingestion imports OK')"
+aws ecr get-login-password --region $env:AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $bookRegistry
+docker tag eos-book-ingestion:book01 "${bookRepositoryUrl}:book01"
+docker push "${bookRepositoryUrl}:book01"
+$bookDigest = aws ecr describe-images --repository-name $bookRepository --image-ids imageTag=book01 --query 'imageDetails[0].imageDigest' --output text
+$bookImageUri = "${bookRepositoryUrl}@${bookDigest}"
+$bookImageUri
+
+
+.\.venv\Scripts\python.exe tools/build_packages.py --install
+
+
+.\.venv\Scripts\python.exe tools/verify_packages.py
+
+
+aws rds describe-db-engine-versions --engine aurora-postgresql --query 'DBEngineVersions[].EngineVersion' --output table
+
+
+Set-Location infra
+terraform init
+terraform fmt -check -recursive
+terraform validate
+terraform plan -var-file=book.tfvars -out=book-review.tfplan
+terraform show -no-color book-review.tfplan
+
+
+terraform apply book-review.tfplan
+terraform output
+$bookWebsite = terraform output -raw https_website_url
+$bookApi = terraform output -raw protected_api_url
+
+
+Set-Location ../frontend
+npm run lint
+npm run build
+Set-Location ../infra
+terraform plan -var-file=book.tfvars -out=frontend-review.tfplan
+terraform show -no-color frontend-review.tfplan
+
+
+terraform apply frontend-review.tfplan
+$bookDistribution = terraform output -raw frontend_distribution_id
+aws cloudfront create-invalidation --distribution-id $bookDistribution --paths '/index.html' '/'
+Set-Location ..
+
+
+Invoke-WebRequest -Uri $bookApi -Method Post -ContentType 'application/json' -Body '{"question":"hello"}' -SkipHttpErrorCheck

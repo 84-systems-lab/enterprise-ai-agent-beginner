@@ -1,0 +1,25 @@
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.local
+*.tfstate*
+*.tfplan
+.terraform/
+infra/book.tfvars
+infra/build/
+infra/answer_jobs_build/
+infra/salesforce_web_build/
+*.zip
+evidence/private/
+
+infra/bootstrap/bootstrap.tfvars
+frontend/dist/
+local-records/
+
+# Keep real configuration private, including alternate environment names.
+.env*
+!.env.example
+*.tfvars
+*.tfvars.json

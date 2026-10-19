@@ -1,0 +1,76 @@
+[
+  {
+    "id": "policy-returns",
+    "source": "aws",
+    "title": "Returns and Damaged Goods Policy",
+    "text": "Report a damaged chair within 7 calendar days of delivery. Provide the order number and clear photographs. A support officer records the request; a refund is not automatic.",
+    "location": "section 2",
+    "uri": "fixture://aws/returns-policy#section-2",
+    "allowed_users": [
+      "alex",
+      "sam"
+    ],
+    "keywords": [
+      "chair",
+      "damaged",
+      "damage",
+      "returns",
+      "policy",
+      "photographs"
+    ]
+  },
+  {
+    "id": "procedure-triage",
+    "source": "sharepoint",
+    "title": "Damaged Chair Triage Procedure",
+    "text": "Open a support Case, attach the order number and photographs, check the delivery date, and assign the Case to the Returns team. Do not promise a replacement before review.",
+    "location": "section 1",
+    "uri": "fixture://sharepoint/triage#section-1",
+    "allowed_users": [
+      "alex",
+      "sam"
+    ],
+    "keywords": [
+      "chair",
+      "damaged",
+      "triage",
+      "procedure",
+      "case"
+    ]
+  },
+  {
+    "id": "approval-exception",
+    "source": "sharepoint",
+    "title": "Returns Manager Approval Guide",
+    "text": "In this fictional exercise, only a Returns manager may approve an exception above AUD750. This document does not authorise the assistant to approve an exception.",
+    "location": "section 3",
+    "uri": "fixture://sharepoint/approval#section-3",
+    "allowed_users": [
+      "sam"
+    ],
+    "keywords": [
+      "approval",
+      "exception",
+      "manager"
+    ]
+  },
+  {
+    "id": "case-eos-1042",
+    "source": "salesforce",
+    "title": "Support Case EOS-1042",
+    "text": "Case EOS-1042 concerns a damaged chair for Example Customer. Its status is New, priority is Medium, and owner is the Returns team. No refund has been approved.",
+    "location": "fixture record EOS-1042",
+    "uri": "fixture://salesforce/Case/EOS-1042",
+    "allowed_users": [
+      "alex",
+      "sam"
+    ],
+    "keywords": [
+      "chair",
+      "case",
+      "status",
+      "eos",
+      "refund"
+    ]
+  }
+]

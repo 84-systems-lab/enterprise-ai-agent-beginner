@@ -1,0 +1,29 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+.\.venv\Scripts\python.exe learning/facts.py
+
+
+.\.venv\Scripts\python.exe learning/decision.py
+
+
+.\.venv\Scripts\python.exe -m learning.check_day
+
+
+.\.venv\Scripts\python.exe learning/read_policy.py
+
+
+.\.venv\Scripts\python.exe -m learning.search damaged
+.\.venv\Scripts\python.exe -m learning.search photographs
+.\.venv\Scripts\python.exe -m learning.search "lunar mining"
+
+
+.\.venv\Scripts\python.exe -c "from learning.search import find_lines; find_lines('', 'resources/company/returns-policy.md')"
+$LASTEXITCODE
+
+
+.\.venv\Scripts\python.exe -m learning.search damaged
+$LASTEXITCODE
+
+
+.\.venv\Scripts\python.exe -m learning.check_lessons

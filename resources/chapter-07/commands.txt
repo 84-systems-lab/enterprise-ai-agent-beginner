@@ -1,0 +1,58 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+.\.venv\Scripts\python.exe -m lab inspect resources/company/returns-policy.md
+
+
+$env:PYTHONPATH = 'app/ingestion/runtime;app/shared'
+.\.venv\Scripts\python.exe -c "from pathlib import Path; from extract_pdf import extract_pages; r=extract_pages(Path('resources/company/returns-policy.pdf')); print('records',len(r)); print(r[0]['text'])"
+
+
+$env:PYTHONPATH = 'app/ingestion/runtime;app/shared'
+.\.venv\Scripts\python.exe -c "from pathlib import Path; from extract_pdf import extract_pages; from chunk_text import chunk_pages; pages=extract_pages(Path('resources/company/returns-policy.pdf')); chunks=chunk_pages(pages,'fixture-policy','pdf','uploads/returns-policy.pdf','fixture-bucket'); print('chunks',len(chunks)); print(chunks[0])"
+
+
+.\.venv\Scripts\python.exe tools/document_walkthrough.py resources/company/returns-policy.pdf --output local-records/policy-default.json
+.\.venv\Scripts\python.exe tools/document_walkthrough.py resources/company/returns-policy.pdf --size 240 --overlap 40 --output local-records/policy-small.json
+
+
+.\.venv\Scripts\python.exe tools/document_walkthrough.py resources/company/returns-policy.md --output local-records/policy-markdown.json
+
+
+Set-Location infra
+$env:VECTOR_DATABASE_ARN = terraform output -raw vector_database_cluster_arn
+$env:VECTOR_DATABASE_SECRET_ARN = terraform output -raw vector_database_secret_arn
+$env:VECTOR_DATABASE_NAME = terraform output -raw vector_database_name
+Set-Location ..
+.\.venv\Scripts\python.exe tools/live.py schema
+.\.venv\Scripts\python.exe tools/live.py database
+
+
+Get-Content app/ingestion/runtime/Dockerfile
+
+
+Set-Location infra
+$documentBucket = terraform output -raw document_bucket_name
+Set-Location ..
+aws s3 cp resources/company/returns-policy.pdf "s3://$documentBucket/uploads/returns-policy.pdf"
+
+
+$bookIngestion = terraform -chdir=infra output -raw ingestion_lambda_name
+aws logs tail "/aws/lambda/$bookIngestion" --since 10m
+
+
+Get-FileHash resources/company/returns-policy.pdf -Algorithm SHA256
+.\.venv\Scripts\python.exe tools/live.py database
+
+
+$env:EMBEDDING_MODEL_ID = 'amazon.titan-embed-text-v2:0'
+.\.venv\Scripts\python.exe tools/live.py retrieve --question 'What do I need to report a damaged chair?'
+
+
+$env:ANSWER_MODEL_ID = 'au.anthropic.claude-haiku-4-5-20251001-v1:0'
+.\.venv\Scripts\python.exe tools/live.py answer --question 'Use AWS documents. What information is required to report a damaged chair?'
+
+
+$bookCitationBucket = terraform -chdir=infra output -raw document_bucket_name
+aws s3 cp "s3://${bookCitationBucket}/uploads/returns-policy.pdf" local-records/returns-policy-checked.pdf
+Get-FileHash resources/company/returns-policy.pdf,local-records/returns-policy-checked.pdf -Algorithm SHA256

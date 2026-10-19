@@ -1,0 +1,20 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+.\.venv\Scripts\python.exe -m learning.evidence damaged
+
+
+.\.venv\Scripts\python.exe -m learning.evidence photographs
+
+
+.\.venv\Scripts\python.exe -m lab ask "What is needed for a damaged chair?"
+
+
+.\.venv\Scripts\python.exe -m lab ask "What is the company's lunar mining allowance?"
+
+
+.\.venv\Scripts\python.exe -m learning.evidence "lunar mining"
+
+
+.\.venv\Scripts\python.exe tools/check.py
+.\.venv\Scripts\python.exe -m learning.check_lessons

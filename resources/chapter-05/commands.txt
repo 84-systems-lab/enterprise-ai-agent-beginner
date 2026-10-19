@@ -1,0 +1,43 @@
+Command excerpts. Read the chapter for working directory, values and prerequisites.
+Do not run this file as an unattended script.
+
+node --version
+npm --version
+
+
+.\.venv\Scripts\python.exe -m lab serve
+
+
+$body = @{
+  question = 'What is needed for a damaged chair?'
+  sources = @('aws')
+  user = 'alex'
+} | ConvertTo-Json
+Invoke-RestMethod -Uri 'http://127.0.0.1:8765/ask' -Method Post -ContentType 'application/json' -Body $body
+
+
+$emptyBody = @{ question = ''; sources = @('aws'); user = 'alex' } | ConvertTo-Json
+$emptyResponse = Invoke-WebRequest -Uri 'http://127.0.0.1:8765/ask' -Method Post -ContentType 'application/json' -Body $emptyBody -SkipHttpErrorCheck
+$emptyResponse.StatusCode
+$emptyResponse.Content
+$noMatchBody = @{ question = 'lunar mining'; sources = @('aws'); user = 'alex' } | ConvertTo-Json
+$noMatch = Invoke-RestMethod -Uri 'http://127.0.0.1:8765/ask' -Method Post -ContentType 'application/json' -Body $noMatchBody
+$noMatch | ConvertTo-Json -Depth 10
+
+
+Set-Location frontend
+npm ci
+npm run lint
+npm run build
+Set-Location ..
+
+
+.\.venv\Scripts\python.exe -c "from lab.core import answer; print(answer('damaged chair', ['aws','sharepoint'], unavailable=['sharepoint']))"
+
+
+Set-Location frontend
+Copy-Item .env.example .env.local
+
+
+npm run build
+Set-Location ..
