@@ -6,6 +6,14 @@ Start with Chapter 1. This edition is designed for first-semester IT students.
 The book explains files, editor, terminal and Python before APIs or cloud setup.
 Use PowerShell 7 on Windows x64 and Python 3.12 for the documented local route.
 
+## Reader questions and feedback
+
+Visit [reader support](https://84-systems-lab.github.io/support.html) or
+[open a question, correction or feedback report](https://github.com/84-systems-lab/enterprise-ai-agent-beginner/issues/new/choose).
+Bishal can reply in the same public conversation; no email address needs to be
+published. A GitHub account is required to post. Remove passwords, tokens,
+private documents and personal data before sharing an error or example.
+
 ## First small program
 
 From this extracted companion root:

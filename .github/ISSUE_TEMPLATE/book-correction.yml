@@ -1,0 +1,26 @@
+name: Book or code correction
+description: Report an error in the first edition or companion resources.
+title: "[Correction] "
+body:
+  - type: markdown
+    attributes:
+      value: "Reports are public. Remove secrets and personal or customer data before posting."
+  - type: input
+    id: location
+    attributes:
+      label: Edition, chapter, section or file
+      description: Include the page number or file path where the problem occurs.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What needs correcting?
+      description: Include current wording or the failing step and expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested correction or evidence
+      description: Optional proposed wording, redacted output or supporting official reference.

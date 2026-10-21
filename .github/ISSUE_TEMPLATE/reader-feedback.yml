@@ -1,0 +1,19 @@
+name: Reader feedback
+description: Tell us what helped or could be clearer.
+title: "[Feedback] "
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for helping improve the book. This feedback is public; do not include personal contact details or private data."
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Your feedback
+      description: Which part helped, needed more explanation or could be improved?
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Chapter or section
+      description: Optional, for feedback about a specific part of the first edition.

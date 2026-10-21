@@ -1,0 +1,31 @@
+name: Reader question
+description: Ask for help with a chapter or the companion project.
+title: "[Question] "
+body:
+  - type: markdown
+    attributes:
+      value: "This is a public conversation. Do not include passwords, tokens, private documents or your .env file. First edition: Build Your First AI Agent with Python by Bishal Giri."
+  - type: input
+    id: location
+    attributes:
+      label: Chapter and section
+      description: Include a page number if helpful.
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What are you trying to understand or do?
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What you tried and what happened
+      description: Include the command, expected result and redacted error when relevant.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system and relevant Python or tool versions, if this is a technical problem.
