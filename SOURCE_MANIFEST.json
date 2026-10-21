@@ -1,5 +1,5 @@
 {
-  "edition": "3",
+  "edition": "1",
   "description": "Separate source distribution; manifest/checkpoint self-hashes excluded.",
   "files": [
     {
@@ -2304,8 +2304,8 @@
     },
     {
       "path": "resources/chapter-11/commands.txt",
-      "bytes": 1353,
-      "sha256": "e3583f0d0b14b0b6b3413bbf58d1552b1fafe1d0ec81781f37f511ab8ebdc983"
+      "bytes": 1876,
+      "sha256": "f2134d92c130678bf1b51dae552b2df5936bed20c9d5f597b155500982aaa017"
     },
     {
       "path": "resources/chapter-11/file-map.txt",

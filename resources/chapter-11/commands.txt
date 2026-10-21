@@ -16,6 +16,17 @@ Copy-Item resources/agent/agent_starter.py local-records/my_agent.py
 .\.venv\Scripts\python.exe local-records/my_agent.py --question 'What is needed to report a damaged chair?'
 
 
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --sources aws --question 'damaged chair' | Set-Content -LiteralPath local-records/agent-policy.json -Encoding utf8
+$agentResult = Get-Content -LiteralPath local-records/agent-policy.json -Raw | ConvertFrom-Json
+$agentResult.mode
+$agentResult.source_outcomes | ConvertTo-Json
+$agentResult.agent_trace | ConvertTo-Json
+$agentResult.citations | ConvertTo-Json -Depth 6
+
+
+.\.venv\Scripts\python.exe tools/agent_app_demo.py --sources aws --question 'lunar mining'
+
+
 .\.venv\Scripts\python.exe tools/agent_app_demo.py --sources aws sharepoint salesforce
 .\.venv\Scripts\python.exe tools/agent_app_demo.py --sources aws sharepoint --unavailable sharepoint
 .\.venv\Scripts\python.exe tools/agent_app_demo.py --sources sharepoint --question 'approval exception' --user alex

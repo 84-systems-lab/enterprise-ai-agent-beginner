@@ -1,7 +1,7 @@
 {
-  "edition": "3",
+  "edition": "1",
   "complete_source_root": ".",
-  "originating_book_source_archive_sha256": "23d91ece269a2211f64a5bdcbe81b1530bf021bb3680f6a86f04e6e86892b961",
+  "originating_book_source_archive_sha256": "7be0904212160fc1e9e13fd39cf75db83240e6ef4870becaab7cea619413d409",
   "chapters": [
     {
       "chapter": 1,
